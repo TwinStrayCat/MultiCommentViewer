@@ -144,6 +144,20 @@ namespace MultiCommentViewer
         public Visibility SystemButtonToolTipVisibility => Visibility.Collapsed;
         private readonly Color _myColor = new Color { A = 0xFF, R = 45, G = 45, B = 48 };
         #endregion//WindowColor
+        public Brush MenuBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor);
+            }
+        }
+        public Brush MenuForeground
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.White);
+            }
+        }
         #region Commands
         public ICommand ActivatedCommand { get; }
         public ICommand LoadedCommand { get; }

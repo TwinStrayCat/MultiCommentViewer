@@ -50,7 +50,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
-        <Menu HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0">
+        <Menu HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Background="{Binding MenuBackground}" Foreground="{Binding MenuForeground}">
             <MenuItem Header="ファイル">
                 <Separator />
                 <MenuItem Header="終了" Command="{Binding ExitCommand}" />
