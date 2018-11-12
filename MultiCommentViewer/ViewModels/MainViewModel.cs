@@ -71,27 +71,133 @@ namespace MultiCommentViewer
     public class MainViewModel : CommentDataGridViewModelBase
     {
         #region WindowColor
-        public Brush ButtonForeground
+        #region TitleBar
+        public Brush SystemButtonForeground
         {
             get
             {
-                return new SolidColorBrush(Colors.White);
+                return new SolidColorBrush(_options.SystemButtonForeground);
             }
         }
-        public Brush ButtonBackground
+        public Brush SystemButtonBackground
         {
             get
             {
-                return new SolidColorBrush(_myColor);
+                return new SolidColorBrush(_options.SystemButtonBackground);
             }
         }
-        public Brush ButtonBorderBrush
+        public Brush SystemButtonBorderBrush
         {
             get
             {
-                return new SolidColorBrush(_myColor);
+                return new SolidColorBrush(_options.SystemButtonBorderBrush);
             }
         }
+        public Brush SystemButtonMouseOverForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.SystemButtonMouseOverForeground);
+            }
+        }
+        public Brush SystemButtonMouseOverBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.SystemButtonMouseOverBackground);
+            }
+        }
+        public Brush SystemButtonMouseOverBorderBrush
+        {
+            get
+            {
+                return new SolidColorBrush(_options.SystemButtonMouseOverBorderBrush);
+            }
+        }
+        public Brush TitleForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.TitleForeground);
+            }
+        }
+        public Brush TitleBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.TitleBackground);
+            }
+        }
+        public Brush TitleBarBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.TitleBarBackground);
+            }
+        }
+        #endregion //TitleBar
+
+        #region MenuBar
+        public Brush MenuForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MenuForeground);
+            }
+        }
+        public Brush MenuBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MenuBackground);
+            }
+        }
+        #endregion //MenuBar
+
+        public Brush ClientAreaBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.ClientAreaBackground);
+            }
+        }
+
+        public Brush ConnectionHeaderBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.ConnectionHeaderBackground);
+            }
+        }
+        public Brush ConnectionHeaderForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.ConnectionHeaderForeground);
+            }
+        }
+        public Brush ConnectionHeaderBorderBrush
+        {
+            get
+            {
+                return new SolidColorBrush(_options.ConnectionHeaderBorderBrush);
+            }
+        }
+        public Brush ConnectionForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.ConnectionForeground);
+            }
+        }
+        public Brush ConnectionBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.ConnectionBackground);
+            }
+        }
+
         public Brush Test
         {
             get
@@ -99,42 +205,14 @@ namespace MultiCommentViewer
                 return new SolidColorBrush(Colors.Yellow);
             }
         }
-        public Brush TitleForeground
+        public Brush Test2
         {
             get
             {
-                return new SolidColorBrush(Colors.White);
+                return new SolidColorBrush(_myColor2);
             }
         }
-        public Brush TitleBackground
-        {
-            get
-            {
-                return new SolidColorBrush(_myColor);
-            }
-        }
-        public Brush TitleBarBackground
-        {
-            get
-            {
-                return new SolidColorBrush(_myColor);
-            }
-        }
-        public Brush ButtonMouseOverForeground
-        {
-            get
-            {
-                return new SolidColorBrush(Colors.White);
-            }
-        }
-        public Brush ButtonMouseOverBackground
-        {
-            get
-            {
-                return new SolidColorBrush(_myColor);
-            }
-        }
-        public Brush ButtonMouseOverBorderBrush
+        public Brush White
         {
             get
             {
@@ -142,22 +220,72 @@ namespace MultiCommentViewer
             }
         }
         public Visibility SystemButtonToolTipVisibility => Visibility.Collapsed;
-        private readonly Color _myColor = new Color { A = 0xFF, R = 45, G = 45, B = 48 };
+        private readonly Color _myColor1 = new Color { A = 0xFF, R = 45, G = 45, B = 48 };
+        private readonly Color _myColor2 = new Color { A = 0xFF, R = 62, G = 62, B = 66 };
+
         #endregion//WindowColor
-        public Brush MenuBackground
+
+
+        #region MetadataView
+        public Brush MetadataViewHeaderForeground
         {
             get
             {
-                return new SolidColorBrush(_myColor);
+                return new SolidColorBrush(_options.MetadataViewHeaderForeground);
             }
         }
-        public Brush MenuForeground
+        public Brush MetadataViewHeaderBackground
         {
             get
             {
-                return new SolidColorBrush(Colors.White);
+                return new SolidColorBrush(_options.MetadataViewHeaderBackground);
             }
         }
+
+        public Brush MetadataViewHeaderBorderBrush
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MetadataViewHeaderBorderBrush);
+            }
+        }
+        public Brush MetadataViewForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MetadataViewForeground);
+            }
+        }
+        public Brush MetadataViewBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MetadataViewBackground);
+            }
+        }
+        public Brush MetadataViewBorderBrush
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MetadataViewBorderBrush);
+            }
+        }
+        public Brush MetadataViewRowBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MetadataViewRowBackground);
+            }
+        }
+        public Brush MetadataViewRowForeground
+        {
+            get
+            {
+                return new SolidColorBrush(_options.MetadataViewRowForeground);
+            }
+        }
+        #endregion //MetadataView
+
         #region Commands
         public ICommand ActivatedCommand { get; }
         public ICommand LoadedCommand { get; }
@@ -885,14 +1013,13 @@ namespace MultiCommentViewer
 
         public MainViewModel():base(new DynamicOptionsTest())
         {
-            if (IsInDesignMode)
-            {
-
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
+            //if (IsInDesignMode)
+            //{
+            //}
+            //else
+            //{
+            //    throw new NotSupportedException();
+            //}
         }
         [GalaSoft.MvvmLight.Ioc.PreferredConstructor]
         public MainViewModel(IIo io, ILogger logger, IOptions options, ISitePluginLoader sitePluginLoader, IBrowserLoader browserLoader)
@@ -961,6 +1088,71 @@ namespace MultiCommentViewer
                     case nameof(_options.IsShowInfo):
                         RaisePropertyChanged(nameof(IsShowInfo));
                         break;
+
+                    case nameof(_options.TitleForeground):
+                        RaisePropertyChanged(nameof(TitleForeground));
+                        break;
+                    case nameof(_options.TitleBackground):
+                        RaisePropertyChanged(nameof(TitleBackground));
+                        break;
+                    case nameof(_options.TitleBarBackground):
+                        RaisePropertyChanged(nameof(TitleBarBackground));
+                        break;
+                    case nameof(_options.SystemButtonForeground):
+                        RaisePropertyChanged(nameof(SystemButtonForeground));
+                        break;
+                    case nameof(_options.SystemButtonBackground):
+                        RaisePropertyChanged(nameof(SystemButtonBackground));
+                        break;
+                    case nameof(_options.SystemButtonBorderBrush):
+                        RaisePropertyChanged(nameof(SystemButtonBorderBrush));
+                        break;
+                    case nameof(_options.MenuForeground):
+                        RaisePropertyChanged(nameof(MenuForeground));
+                        break;
+                    case nameof(_options.MenuBackground):
+                        RaisePropertyChanged(nameof(MenuBackground));
+                        break;
+                    case nameof(_options.ClientAreaBackground):
+                        RaisePropertyChanged(nameof(ClientAreaBackground));
+                        break;
+                    case nameof(_options.ConnectionHeaderForeground):
+                        RaisePropertyChanged(nameof(ConnectionHeaderForeground));
+                        break;
+                    case nameof(_options.ConnectionHeaderBackground):
+                        RaisePropertyChanged(nameof(ConnectionHeaderBackground));
+                        break;
+                    case nameof(_options.ConnectionHeaderBorderBrush):
+                        RaisePropertyChanged(nameof(ConnectionHeaderBorderBrush));
+                        break;
+
+                    case nameof(_options.MetadataViewHeaderForeground):
+                        RaisePropertyChanged(nameof(MetadataViewHeaderForeground));
+                        break;
+                    case nameof(_options.MetadataViewHeaderBackground):
+                        RaisePropertyChanged(nameof(MetadataViewHeaderBackground));
+                        break;
+                    case nameof(_options.MetadataViewHeaderBorderBrush):
+                        RaisePropertyChanged(nameof(MetadataViewHeaderBorderBrush));
+                        break;
+
+                    case nameof(_options.MetadataViewForeground):
+                        RaisePropertyChanged(nameof(MetadataViewForeground));
+                        break;
+                    case nameof(_options.MetadataViewBackground):
+                        RaisePropertyChanged(nameof(MetadataViewBackground));
+                        break;
+                    case nameof(_options.MetadataViewBorderBrush):
+                        RaisePropertyChanged(nameof(MetadataViewBorderBrush));
+                        break;
+                    case nameof(_options.MetadataViewRowForeground):
+                        RaisePropertyChanged(nameof(MetadataViewRowForeground));
+                        break;
+                    case nameof(_options.MetadataViewRowBackground):
+                        RaisePropertyChanged(nameof(MetadataViewRowBackground));
+                        break;
+
+
                 }
             };
             RaisePropertyChanged(nameof(Topmost));

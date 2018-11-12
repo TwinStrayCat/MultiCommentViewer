@@ -35,14 +35,14 @@
                     <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
                     <Condition Binding="{Binding IsDragging, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="{Binding ButtonMouseOverForeground}" />
-                <Setter Property="Background" Value="{Binding ButtonMouseOverBackground}" />
-                <Setter Property="BorderBrush" Value="{Binding ButtonMouseOverBorderBrush}" />
+                <Setter Property="Foreground" Value="{Binding SystemButtonMouseOverForeground}" />
+                <Setter Property="Background" Value="{Binding SystemButtonMouseOverBackground}" />
+                <Setter Property="BorderBrush" Value="{Binding SystemButtonMouseOverBorderBrush}" />
             </MultiDataTrigger>
 
-            <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+            <!--<DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
                 <Setter Property="Foreground" Value="{Binding Test}"/>
-            </DataTrigger>            
+            </DataTrigger>-->            
         </ControlTemplate.Triggers>
                 
     </ControlTemplate>
@@ -88,10 +88,10 @@
     <!--拡大縮小、閉じるボタンの通常時のスタイル-->
     <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=local:CustomChrome, ResourceId=WindowButtonStyle}" TargetType="{x:Type Button}">
         <Setter Property="Template" Value="{StaticResource {ComponentResourceKey TypeInTargetAssembly=local:CustomChrome, ResourceId=ButtonTemplate}}" />
-        <Setter Property="Background" Value="{Binding ButtonBackground}"/>
+        <Setter Property="Background" Value="{Binding SystemButtonBackground}"/>
         <Setter Property="FontFamily" Value="Webdings"/>
         <Setter Property="FontSize" Value="15" />
-        <Setter Property="Foreground" Value="{Binding ButtonForeground}" />
+        <Setter Property="Foreground" Value="{Binding SystemButtonForeground}" />
         <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="Padding" Value="5,3,5,3"/>
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -124,9 +124,9 @@
                     <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
                     <Condition Binding="{Binding IsDragging, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
                 </MultiDataTrigger.Conditions>
-                <Setter Property="Foreground" Value="{Binding ButtonMouseOverForeground}" />
-                <Setter Property="Background" Value="{Binding ButtonMouseOverBackground}" />
-                <Setter Property="BorderBrush" Value="{Binding ButtonMouseOverBorderBrush}" />
+                <Setter Property="Foreground" Value="{Binding SystemButtonMouseOverForeground}" />
+                <Setter Property="Background" Value="{Binding SystemButtonMouseOverBackground}" />
+                <Setter Property="BorderBrush" Value="{Binding SystemButtonMouseOverBorderBrush}" />
             </MultiDataTrigger>
 
             <!--<Trigger Property="IsPressed" Value="True">
@@ -229,13 +229,13 @@
                 <Setter TargetName="PART_Maximize" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <!--非アクティブ時-->
-            <Trigger Property="IsActive" Value="False">
+            <!--<Trigger Property="IsActive" Value="False">
                 <Setter TargetName="PART_WindowBorder" Property="BorderBrush" Value="DarkGray" />
                 <Setter TargetName="PART_LayoutGrid" Property="Opacity" Value="0.75" />
                 <Setter TargetName="PART_HeaderBorder" Property="Background" Value="Gray" />
                 <Setter TargetName="PART_Icon" Property="Source" Value="{StaticResource LogoInactive}" />
                 <Setter TargetName="PART_Title" Property="Foreground" Value="DarkGray" />
-            </Trigger>
+            </Trigger>-->
         </ControlTemplate.Triggers>
 
     </ControlTemplate>

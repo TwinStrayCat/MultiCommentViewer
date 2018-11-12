@@ -68,6 +68,8 @@
             <ComboBox ItemsSource="{Binding FontFamillyCollection}" DisplayMemberPath="Text" SelectedValue="{Binding FontFamily, Mode=TwoWay}" Margin="73,210,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" />
             <ComboBox ItemsSource="{Binding FontSizeCollection}" SelectedValue="{Binding FontSize}" Margin="228,210,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" />
             <CheckBox IsChecked="{Binding IsBold}" Content="太字" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="345,210,0,0" />
+            <Button Content="Dark" Command="{Binding SetDarkCommand}" HorizontalAlignment="Left" Margin="70,520,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Content="Default" Command="{Binding SetDefaultCommand}" HorizontalAlignment="Left" Margin="228,520,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

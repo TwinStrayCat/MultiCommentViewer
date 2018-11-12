@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using SitePlugin;
+using System.Windows.Media;
 //TODO:過去コメントの取得
 
 
@@ -7,6 +8,24 @@ namespace MultiCommentViewer
 {
     public class MetadataViewModel : ViewModelBase
     {
+        #region Style
+        private readonly Color _myColor1 = new Color { A = 0xFF, R = 45, G = 45, B = 48 };
+        private readonly Color _myColor2 = new Color { A = 0xFF, R = 62, G = 62, B = 66 };
+        public Brush MetadataViewRowBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor1);
+            }
+        }
+        public Brush MetadataViewRowForeground
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.White);
+            }
+        }
+        #endregion //Style
         private string _title;
         public string Title
         {

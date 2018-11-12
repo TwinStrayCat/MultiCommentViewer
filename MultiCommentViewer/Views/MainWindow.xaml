@@ -39,8 +39,9 @@
         <w:GridLengthConverter x:Key="gridLengthConverter" />
         <local:MessageConverter x:Key="messageConverter" />
         <local:NameConverter x:Key="nameConverter" />
+
     </Window.Resources>
-    <Grid>
+    <Grid Background="{Binding ClientAreaBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="{Binding ConnectionViewHeight, Mode=TwoWay, Converter={StaticResource gridLengthConverter}}"/>
@@ -50,6 +51,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
+        <!--Element treeに属さないelementにDataContextを渡すためのdummy element-->
+        <FrameworkElement x:Name="dummyElement" Visibility="Collapsed" DataContext="{Binding}"/>
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Background="{Binding MenuBackground}" Foreground="{Binding MenuForeground}">
             <MenuItem Header="ファイル">
                 <Separator />
@@ -101,17 +104,75 @@
                 <Button Content="選択した接続を削除" Command="{Binding RemoveSelectedConnectionCommand}" Margin="0,5" Grid.Column="3" />
                 <Button Content="取得済みコメントを削除" IsEnabled="False" Command="{Binding ClearAllCommentsCommand}" Margin="0,5" Grid.Column="5" />
             </Grid>
-            <ListView Grid.Row="1" ItemsSource="{Binding Connections}" 
+            <ListView Grid.Row="1" ItemsSource="{Binding Connections}" Background="{Binding ConnectionBackground}" Foreground="{Binding ConnectionForeground}"
                   AllowDrop="True" MinHeight="90" 
                   HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch">
                 <ListView.Resources>
+                    <Style x:Key="columnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+                        <Setter Property="Width" Value="8"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="SizeWE"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                        <Setter Property="Background" Value="{Binding DataContext.ConnectionHeaderBackground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="Foreground" Value="{Binding DataContext.ConnectionHeaderForeground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="BorderBrush" Value="{Binding DataContext.ConnectionHeaderBorderBrush, Source={x:Reference dummyElement}}" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="BorderThickness" Value="50" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                    <Grid>
+                                        <Border BorderThickness="0,0,1,0" 
+                                                BorderBrush="{Binding DataContext.ConnectionHeaderBorderBrush, Source={x:Reference dummyElement}}"
+                                                Background="Transparent">
+                                            <TextBlock x:Name="ContentHeader"
+                                                       Background="{Binding DataContext.ConnectionHeaderBackground, Source={x:Reference dummyElement}}"
+                                                       Foreground="{Binding DataContext.ConnectionHeaderForeground, Source={x:Reference dummyElement}}"
+                                                       Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                        </Border>
+                                        <!-- サイズ変更グリップ -->
+                                        <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource columnHeaderGripperStyle}"/>
+                                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource columnHeaderGripperStyle}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Resources>
+                            <!-- Foreground for Selected ListViewItem -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" 
+                                 Color="Yellow"/>
+                            <!-- Background for Selected ListViewItem -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                 Color="Yellow"/>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                                    <Condition Binding="{Binding IsDragging, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Foreground" Value="{Binding DataContext.ButtonMouseOverForeground, Source={x:Reference dummyElement}}" />
+                                <Setter Property="Background" Value="{Binding DataContext.ButtonMouseOverBackground, Source={x:Reference dummyElement}}" />
+                                <Setter Property="BorderBrush" Value="{Binding DataContext.ButtonMouseOverBorderBrush, Source={x:Reference dummyElement}}" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
                             <GridViewColumn Width="40">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="選択" />
+                                    <GridViewColumnHeader Content="選択" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -121,7 +182,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="120">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="サイト" />
+                                    <GridViewColumnHeader Content="サイト" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -133,7 +194,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="Auto">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="名前" />
+                                    <GridViewColumnHeader Content="名前" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -143,7 +204,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="220">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="URL,放送ID等" />
+                                    <GridViewColumnHeader Content="URL,放送ID等" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -153,7 +214,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="130">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="ブラウザ" />
+                                    <GridViewColumnHeader Content="ブラウザ" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -164,7 +225,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="50">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="接続" />
+                                    <GridViewColumnHeader Content="接続" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -174,7 +235,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="50">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="切断" />
+                                    <GridViewColumnHeader Content="切断" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -184,7 +245,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="40">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="保存" />
+                                    <GridViewColumnHeader Content="保存" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -194,7 +255,7 @@
                             </GridViewColumn>
                             <GridViewColumn Width="80">
                                 <GridViewColumn.Header>
-                                    <TextBlock Text="ログインユーザ名" />
+                                    <GridViewColumnHeader Content="ログインユーザ名" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -207,9 +268,9 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows" />
+        <GridSplitter Background="{Binding ClientAreaBackground}" Grid.Row="2" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows" />
         <Grid Grid.Row="3">
-            <DataGrid ItemsSource="{Binding MetaCollection, IsAsync=True}" Margin="0" MinHeight="80"
+            <DataGrid ItemsSource="{Binding MetaCollection, IsAsync=True}" Margin="5,0" MinHeight="80"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserDeleteRows="False"
@@ -219,27 +280,215 @@
                       CanUserSortColumns="False"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      RowHeaderWidth="0"
                       >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="接続名" Binding="{Binding ConnectionName}">
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="タイトル" Binding="{Binding Title}">
-                    </DataGridTextColumn>
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{Binding SelectedRowBackColor}"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{Binding SelectedRowForeColor}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{Binding SelectedRowBackColor}"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{Binding SelectedRowForeColor}"/>
+                    <Style TargetType="{x:Type DataGrid}">
+                        <Setter Property="Background" Value="{Binding MetadataViewBackground}" />
+                        <Setter Property="Foreground" Value="{Binding MetadataViewForeground}" />
+                    </Style>
+                    <!-- Thumb(列ヘッダ幅変更マウスカーソル) Style設定 -->
+                    <!--<Style x:Key="columnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+                        <Setter Property="Width" Value="8"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="SizeWE"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>-->
+                    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                        <Setter Property="Foreground" Value="{Binding DataContext.MetadataViewHeaderForeground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="Background" Value="{Binding DataContext.MetadataViewHeaderBackground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="BorderBrush" Value="{Binding DataContext.MetadataViewHeaderBorderBrush, Source={x:Reference dummyElement}}" />
+                        <Setter Property="BorderThickness" Value="0 0 1 1" />
+                    </Style>
+                    <Style x:Key="headerStyle" TargetType="{x:Type TextBlock}">
+                        <Setter Property="Padding" Value="5 3 5 3" />
+                        <Setter Property="Background" Value="{Binding DataContext.MetadataViewHeaderBackground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="Foreground" Value="{Binding DataContext.MetadataViewHeaderForeground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                    <!--<Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="5 5 5 5" />
+                    </Style>-->
+                    <!--<Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                        <Setter Property="Foreground" Value="{Binding MetadataViewHeaderForeground}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                                    <Grid>
+                                        --><!-- ヘッダ の外観 --><!--
+                                        <Border x:Name="columnHeaderBorder"
+                                                BorderThickness="0 0 1 1"
+                                                Padding="3 0 3 0"
+                                                BorderBrush="{Binding MetadataViewHeaderBorderBrush}"
+                                                >
 
-                    <DataGridTextColumn Header="経過時間" Binding="{Binding Elapsed}">
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="視聴者数" Binding="{Binding CurrentViewers}">
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="総視聴者数" Binding="{Binding TotalViewers}">
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="アクティブ" Binding="{Binding Active}">
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="その他" Binding="{Binding Others}">
-                    </DataGridTextColumn>
+                                            <Grid>
+                                                --><!-- ソートマーク --><!--
+                                                <Path x:Name="sortArrow"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Top"
+                                      Width="8" Height="6" Margin="0 2 0 0"
+                                      Stretch="Fill" Fill="DarkGray"
+                                      RenderTransformOrigin="0.5 0.4"
+                                      Visibility="Collapsed"
+                                      Data="M0,0 L1,0 0.5,1 z" />
+                                                --><!-- ヘッダ文字列 --><!--
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" TextBlock.Foreground="{Binding MetadataViewHeaderForeground}" />
+                                            </Grid>
+                                        </Border>
+
+                                        --><!-- サイズ変更グリップ --><!--
+                                        <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource columnHeaderGripperStyle}"/>
+                                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource columnHeaderGripperStyle}"/>
+                                    </Grid>
+
+                                    --><!-- ソート trigger --><!--
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="SortDirection" Value="Ascending">
+                                            <Setter TargetName="sortArrow" Property="Visibility" Value="Visible" />
+                                            <Setter TargetName="sortArrow" Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <RotateTransform Angle="180" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <Trigger Property="SortDirection" Value="Descending">
+                                            <Setter TargetName="sortArrow" Property="Visibility" Value="Visible" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>-->
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="{Binding DataContext.MetadataViewRowBackground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="Foreground" Value="{Binding DataContext.MetadataViewRowForeground, Source={x:Reference dummyElement}}" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Foreground" Value="{Binding DataContext.SelectedRowForeground, Source={x:Reference dummyElement}}" />
+                                <Setter Property="Background" Value="{Binding DataContext.SelectedRowBackground, Source={x:Reference dummyElement}}" />
+                                <!--<Setter Property="BorderBrush" Value="{Binding DataContext.MetadataViewHeaderBorderBrush, Source={x:Reference dummyElement}}" />-->
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <!--<Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Background" Value="{Binding MetadataViewRowBackground}" />
+                        <Setter Property="Foreground" Value="{Binding MetadataViewRowForeground}" />
+                        <Setter Property="BorderBrush" Value="White" />
+                        <Setter Property="BorderThickness" Value="0 0 1 1" />
+                    </Style>-->
+
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="接続名" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ConnectionName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="タイトル" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="経過時間" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Elapsed}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="視聴者数" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CurrentViewers}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="総視聴者数" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TotalViewers}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="アクティブ" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Active}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="その他" Style="{StaticResource headerStyle}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Others}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <GridSplitter Grid.Row="4" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"  />
+        <GridSplitter Background="{Binding ClientAreaBackground}" Grid.Row="4" Height="5" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows"  />
         <local:CommentDataGrid IsShowUserInfoMenuItem="True" Margin="5" Grid.Row="5" />
         <!--<DataGrid x:Name="dataGrid" ItemsSource="{Binding Comments, IsAsync=True}"
                   AutoGenerateColumns="False"

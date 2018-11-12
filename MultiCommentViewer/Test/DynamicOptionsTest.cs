@@ -42,6 +42,41 @@ namespace MultiCommentViewer.Test
         public Color BroadcastInfoBackColor { get => GetValue(); set => SetValue(value); }
         public Color SelectedRowBackColor { get => GetValue(); set => SetValue(value); }
         public Color SelectedRowForeColor { get => GetValue(); set => SetValue(value); }
+
+        public Color SystemButtonForeground { get => GetValue(); set => SetValue(value); }
+        public Color SystemButtonBackground { get => GetValue(); set => SetValue(value); }
+        public Color SystemButtonBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color SystemButtonMouseOverForeground { get => GetValue(); set => SetValue(value); }
+        public Color SystemButtonMouseOverBackground { get => GetValue(); set => SetValue(value); }
+        public Color SystemButtonMouseOverBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color TitleBarBackground { get => GetValue(); set => SetValue(value); }
+        public Color TitleForeground { get => GetValue(); set => SetValue(value); }
+        public Color TitleBackground { get => GetValue(); set => SetValue(value); }
+        public Color MenuForeground { get => GetValue(); set => SetValue(value); }
+        public Color MenuBackground { get => GetValue(); set => SetValue(value); }
+        public Color ClientAreaBackground { get => GetValue(); set => SetValue(value); }
+        public Color ConnectionHeaderForeground { get => GetValue(); set => SetValue(value); }
+        public Color ConnectionHeaderBackground { get => GetValue(); set => SetValue(value); }
+        public Color ConnectionHeaderBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color ConnectionForeground { get => GetValue(); set => SetValue(value); }
+        public Color ConnectionBackground { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewHeaderForeground { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewHeaderBackground { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewHeaderBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewForeground { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewBackground { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewRowForeground { get => GetValue(); set => SetValue(value); }
+        public Color MetadataViewRowBackground { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewHeaderForeground { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewHeaderBackground { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewHeaderBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewForeground { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewBackground { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewBorderBrush { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewRowForeground { get => GetValue(); set => SetValue(value); }
+        public Color CommentViewRowBackground { get => GetValue(); set => SetValue(value); }
+
         public double ConnectionNameWidth { get => GetValue(); set => SetValue(value); }
         public bool IsShowConnectionName { get => GetValue(); set => SetValue(value); }
         public int ConnectionNameDisplayIndex { get => GetValue(); set => SetValue(value); }
@@ -105,6 +140,42 @@ namespace MultiCommentViewer.Test
             Dict.Add(nameof(BroadcastInfoBackColor), new Item { DefaultValue = ColorFromArgb("#FFEFEFEF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
             Dict.Add(nameof(SelectedRowBackColor), new Item { DefaultValue = ColorFromArgb("#FF0078D7"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
             Dict.Add(nameof(SelectedRowForeColor), new Item {  DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+
+            Dict.Add(nameof(SystemButtonForeground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(SystemButtonBackground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(SystemButtonBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(SystemButtonMouseOverForeground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(SystemButtonMouseOverBackground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(SystemButtonMouseOverBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(TitleBarBackground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(TitleForeground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(TitleBackground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MenuForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MenuBackground), new Item { DefaultValue = ColorFromArgb("#FFF0F0F0"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(ClientAreaBackground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(ConnectionHeaderForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(ConnectionHeaderBackground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(ConnectionHeaderBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(ConnectionForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(ConnectionBackground), new Item { DefaultValue = ColorFromArgb("#FFFFFFFF"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+
+
+            Dict.Add(nameof(MetadataViewHeaderForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewHeaderBackground), new Item { DefaultValue = ColorFromArgb("#FFF3F4F6"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewHeaderBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFE2E3E5"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewBackground), new Item { DefaultValue = ColorFromArgb("#FFF0F0F0"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFDCDCDC"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewRowForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(MetadataViewRowBackground), new Item { DefaultValue = ColorFromArgb("#FFF0F0F0"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewHeaderForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewHeaderBackground), new Item { DefaultValue = ColorFromArgb("#FFF3F4F6"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewHeaderBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFE2E3E5"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewBackground), new Item { DefaultValue = ColorFromArgb("#FFF0F0F0"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewBorderBrush), new Item { DefaultValue = ColorFromArgb("#FFDCDCDC"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewRowForeground), new Item { DefaultValue = ColorFromArgb("#FF000000"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
+            Dict.Add(nameof(CommentViewRowBackground), new Item { DefaultValue = ColorFromArgb("#FFF0F0F0"), Predicate = c => true, Serializer = c => ColorToArgb(c), Deserializer = s => ColorFromArgb(s) });
 
             Dict.Add(nameof(ConnectionNameWidth), new Item { DefaultValue = 100, Predicate = n => n > 0, Serializer = n => n.ToString(), Deserializer = s => double.Parse(s) });
             Dict.Add(nameof(ThumbnailWidth), new Item { DefaultValue = 100, Predicate = n => n > 0, Serializer = n => n.ToString(), Deserializer = s => double.Parse(s) });

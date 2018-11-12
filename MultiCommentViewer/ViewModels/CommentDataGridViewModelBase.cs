@@ -167,6 +167,8 @@ namespace MultiCommentViewer
             get { return _options.SelectedRowForeColor; }
             set { _options.SelectedRowForeColor = value; }
         }
+        public Brush SelectedRowBackground => new SolidColorBrush(SelectedRowBackColor);
+        public Brush SelectedRowForeground => new SolidColorBrush(SelectedRowForeColor);
         public McvCommentViewModel SelectedComment { get; set; }
         private readonly IOptions _options;
 
@@ -174,6 +176,20 @@ namespace MultiCommentViewer
         {
             _options = options;
             Comments = CollectionViewSource.GetDefaultView(new ObservableCollection<ICommentViewModel>());
+            options.PropertyChanged += (s, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case nameof(options.SelectedRowForeColor):
+                        RaisePropertyChanged(nameof(SelectedRowForeColor));
+                        RaisePropertyChanged(nameof(SelectedRowForeground));
+                        break;
+                    case nameof(options.SelectedRowBackColor):
+                        RaisePropertyChanged(nameof(SelectedRowBackColor));
+                        RaisePropertyChanged(nameof(SelectedRowBackground));
+                        break;
+                }
+            };
         }
         public CommentDataGridViewModelBase(IOptions options,ICollectionView comments)
         {

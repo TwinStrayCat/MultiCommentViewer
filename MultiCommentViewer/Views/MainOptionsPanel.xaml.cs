@@ -74,8 +74,11 @@ namespace MultiCommentViewer
             return text;
         }
     }
-    class MainOptionsViewModel
+    class MainOptionsViewModel:GalaSoft.MvvmLight.ViewModelBase
     {
+        public ICommand SetDarkCommand { get; private set; }
+        public ICommand SetDefaultCommand { get; private set; }
+
         public Color BackColor
         {
             get { return ChangedOptions.BackColor; }
@@ -229,6 +232,172 @@ namespace MultiCommentViewer
         {
             Init(options);
         }
+        public Color SystemButtonForeground
+        {
+            get { return ChangedOptions.SystemButtonForeground; }
+            set { ChangedOptions.SystemButtonForeground = value; }
+        }
+        public Color SystemButtonBackground
+        {
+            get { return ChangedOptions.SystemButtonBackground; }
+            set { ChangedOptions.SystemButtonBackground = value; }
+        }
+        public Color SystemButtonBorderBrush
+        {
+            get { return ChangedOptions.SystemButtonBorderBrush; }
+            set { ChangedOptions.SystemButtonBorderBrush = value; }
+        }
+        public Color SystemButtonMouseOverForeground
+        {
+            get { return ChangedOptions.SystemButtonMouseOverForeground; }
+            set { ChangedOptions.SystemButtonMouseOverForeground = value; }
+        }
+        public Color SystemButtonMouseOverBackground
+        {
+            get { return ChangedOptions.SystemButtonMouseOverBackground; }
+            set { ChangedOptions.SystemButtonMouseOverBackground = value; }
+        }
+        public Color SystemButtonMouseOverBorderBrush
+        {
+            get { return ChangedOptions.SystemButtonMouseOverBorderBrush; }
+            set { ChangedOptions.SystemButtonMouseOverBorderBrush = value; }
+        }
+        public Color TitleBarBackground
+        {
+            get { return ChangedOptions.TitleBarBackground; }
+            set { ChangedOptions.TitleBarBackground = value; }
+        }
+        public Color TitleForeground
+        {
+            get { return ChangedOptions.TitleForeground; }
+            set { ChangedOptions.TitleForeground = value; }
+        }
+        public Color TitleBackground
+        {
+            get { return ChangedOptions.TitleBackground; }
+            set { ChangedOptions.TitleBackground = value; }
+        }
+        public Color MenuForeground
+        {
+            get { return ChangedOptions.MenuForeground; }
+            set { ChangedOptions.MenuForeground = value; }
+        }
+        public Color MenuBackground
+        {
+            get { return ChangedOptions.MenuBackground; }
+            set { ChangedOptions.MenuBackground = value; }
+        }
+        public Color ClientAreaBackground
+        {
+            get { return ChangedOptions.ClientAreaBackground; }
+            set { ChangedOptions.ClientAreaBackground = value; }
+        }
+        public Color ConnectionHeaderBackground
+        {
+            get { return ChangedOptions.ConnectionHeaderBackground; }
+            set { ChangedOptions.ConnectionHeaderBackground = value; }
+        }
+        public Color ConnectionHeaderForeground
+        {
+            get { return ChangedOptions.ConnectionHeaderForeground; }
+            set { ChangedOptions.ConnectionHeaderForeground = value; }
+        }
+        public Color ConnectionHeaderBorderBrush
+        {
+            get { return ChangedOptions.ConnectionHeaderBorderBrush; }
+            set { ChangedOptions.ConnectionHeaderBorderBrush = value; }
+        }
+        public Color ConnectionBackground
+        {
+            get { return ChangedOptions.ConnectionBackground; }
+            set { ChangedOptions.ConnectionBackground = value; }
+        }
+        public Color ConnectionForeground
+        {
+            get { return ChangedOptions.ConnectionForeground; }
+            set { ChangedOptions.ConnectionForeground = value; }
+        }
+
+        public Color MetadataViewHeaderForeground
+        {
+            get { return ChangedOptions.MetadataViewHeaderForeground; }
+            set { ChangedOptions.MetadataViewHeaderForeground = value; }
+        }
+        public Color MetadataViewHeaderBackground
+        {
+            get { return ChangedOptions.MetadataViewHeaderBackground; }
+            set { ChangedOptions.MetadataViewHeaderBackground = value; }
+        }
+        public Color MetadataViewHeaderBorderBrush
+        {
+            get { return ChangedOptions.MetadataViewHeaderBorderBrush; }
+            set { ChangedOptions.MetadataViewHeaderBorderBrush = value; }
+        }
+        public Color MetadataViewForeground
+        {
+            get { return ChangedOptions.MetadataViewForeground; }
+            set { ChangedOptions.MetadataViewForeground = value; }
+        }
+        public Color MetadataViewBackground
+        {
+            get { return ChangedOptions.MetadataViewBackground; }
+            set { ChangedOptions.MetadataViewBackground = value; }
+        }
+        public Color MetadataViewBorderBrush
+        {
+            get { return ChangedOptions.MetadataViewBorderBrush; }
+            set { ChangedOptions.MetadataViewBorderBrush = value; }
+        }
+        public Color MetadataViewRowForeground
+        {
+            get { return ChangedOptions.MetadataViewRowForeground; }
+            set { ChangedOptions.MetadataViewRowForeground = value; }
+        }
+        public Color MetadataViewRowBackground
+        {
+            get { return ChangedOptions.MetadataViewRowBackground; }
+            set { ChangedOptions.MetadataViewRowBackground = value; }
+        }
+        public Color CommentViewHeaderForeground
+        {
+            get { return ChangedOptions.CommentViewHeaderForeground; }
+            set { ChangedOptions.CommentViewHeaderForeground = value; }
+        }
+        public Color CommentViewHeaderBackground
+        {
+            get { return ChangedOptions.CommentViewHeaderBackground; }
+            set { ChangedOptions.CommentViewHeaderBackground = value; }
+        }
+        public Color CommentViewHeaderBorderBrush
+        {
+            get { return ChangedOptions.CommentViewHeaderBorderBrush; }
+            set { ChangedOptions.CommentViewHeaderBorderBrush = value; }
+        }
+        public Color CommentViewForeground
+        {
+            get { return ChangedOptions.CommentViewForeground; }
+            set { ChangedOptions.CommentViewForeground = value; }
+        }
+        public Color CommentViewBackground
+        {
+            get { return ChangedOptions.CommentViewBackground; }
+            set { ChangedOptions.CommentViewBackground = value; }
+        }
+        public Color CommentViewBorderBrush
+        {
+            get { return ChangedOptions.CommentViewBorderBrush; }
+            set { ChangedOptions.CommentViewBorderBrush = value; }
+        }
+        public Color CommentViewRowForeground
+        {
+            get { return ChangedOptions.CommentViewRowForeground; }
+            set { ChangedOptions.CommentViewRowForeground = value; }
+        }
+        public Color CommentViewRowBackground
+        {
+            get { return ChangedOptions.CommentViewRowBackground; }
+            set { ChangedOptions.CommentViewRowBackground = value; }
+        }
 
         private void Init(IOptions options)
         {
@@ -247,6 +416,77 @@ namespace MultiCommentViewer
 
             InfoTypeCollection = new ObservableCollection<InfoType>(Enum.GetValues(typeof(InfoType)).Cast<InfoType>());
             SelectedInfoType = options.ShowingInfoLevel;
+
+            SetDarkCommand = new GalaSoft.MvvmLight.CommandWpf.RelayCommand(() =>
+            {
+                var _myColor1 = new Color { A = 0xFF, R = 45, G = 45, B = 48 };
+                var _myColor2 = new Color { A = 0xFF, R = 62, G = 62, B = 66 };
+                SystemButtonForeground = Colors.White;
+                SystemButtonBackground = _myColor1;
+                SystemButtonBorderBrush = _myColor1;
+                SystemButtonMouseOverBackground = _myColor1;
+                SystemButtonMouseOverBorderBrush = Colors.White;
+                SystemButtonMouseOverForeground = Colors.White;
+                TitleBarBackground = _myColor1;
+                TitleBackground = _myColor1;
+                TitleForeground = Colors.White;
+                MenuForeground = Colors.White;
+                MenuBackground = _myColor1;
+                ClientAreaBackground = _myColor1;
+                ConnectionHeaderForeground = Colors.White;
+                ConnectionHeaderBackground = _myColor1;
+                ConnectionHeaderBorderBrush = Colors.White;
+                ConnectionForeground = Colors.White;
+                ConnectionBackground = _myColor2;
+
+                MetadataViewHeaderForeground = Colors.White;
+                MetadataViewHeaderBackground = _myColor1;
+                MetadataViewHeaderBorderBrush = _myColor2;
+                MetadataViewForeground = Colors.White;
+                MetadataViewBackground = _myColor1;
+                MetadataViewBorderBrush = Colors.White;
+                MetadataViewRowForeground = Colors.White;
+                MetadataViewRowBackground = _myColor2;
+            });
+            SetDefaultCommand = new GalaSoft.MvvmLight.CommandWpf.RelayCommand(() =>
+            {
+                var glay= new Color { A = 255, R = 240, G = 240, B = 240 };
+                SystemButtonForeground = Colors.Black;
+                SystemButtonBackground = Colors.White;
+                SystemButtonBorderBrush = Colors.White;
+                SystemButtonMouseOverBackground = new Color { A = 255, R = 229, G = 229, B = 229 };
+                SystemButtonMouseOverBorderBrush = new Color { A = 255, R = 229, G = 229, B = 229 };
+                SystemButtonMouseOverForeground = Colors.Black;
+                TitleBarBackground = Colors.White;
+                TitleBackground = Colors.White;
+                TitleForeground = Colors.Black;
+                MenuForeground = Colors.Black;
+                MenuBackground = new Color { A = 255, R = 240, G = 240, B = 240 };
+                ClientAreaBackground = Colors.White;
+                ConnectionHeaderForeground = Colors.Black;
+                ConnectionHeaderBackground = new Color { A = 255, R = 247, G = 248, B = 250 };
+                ConnectionHeaderBorderBrush = Colors.Yellow;// Colors.Black;
+                ConnectionForeground = Colors.Black;
+                ConnectionBackground = Colors.White;
+
+                MetadataViewHeaderForeground = Colors.Black;
+                MetadataViewHeaderBackground = new Color { A = 255, R = 247, G = 248, B = 250 };
+                MetadataViewHeaderBorderBrush = Colors.Black;
+                MetadataViewForeground = Colors.Black;
+                MetadataViewBackground = new Color { A = 255, R = 240, G = 240, B = 240 };
+                MetadataViewBorderBrush = new Color { A = 255, R = 220, G = 220, B = 220 };
+                MetadataViewRowForeground = Colors.Black;
+                MetadataViewRowBackground = new Color { A = 255, R = 240, G = 240, B = 240 };
+
+                CommentViewHeaderForeground = Colors.Black;
+                CommentViewHeaderBackground = new Color { A = 255, R = 247, G = 248, B = 250 };
+                CommentViewHeaderBorderBrush = Colors.Black;
+                CommentViewForeground = Colors.Black;
+                CommentViewBackground = new Color { A = 255, R = 240, G = 240, B = 240 };
+                CommentViewBorderBrush = new Color { A = 255, R = 220, G = 220, B = 220 };
+                CommentViewRowForeground = Colors.Black;
+                CommentViewRowBackground = new Color { A = 255, R = 240, G = 240, B = 240 };
+            });
 
         }
         public MainOptionsViewModel()
