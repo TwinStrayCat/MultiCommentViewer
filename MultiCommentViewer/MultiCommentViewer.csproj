@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomChrome.cs" />
     <Compile Include="ViewModels\ConnectionSerializer.cs" />
     <Compile Include="Views\CommentDataGrid.xaml.cs">
       <DependentUpon>CommentDataGrid.xaml</DependentUpon>
@@ -103,6 +104,14 @@
     <Compile Include="ViewModels\UserStoreTest.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Themes\CustomChrome.Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CommentDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

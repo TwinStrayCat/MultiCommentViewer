@@ -1,4 +1,4 @@
-﻿<Window x:Class="MultiCommentViewer.MainWindow"
+﻿<custom:CustomChrome x:Class="MultiCommentViewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,6 +8,7 @@
         xmlns:w="clr-namespace:Common.Wpf;assembly=Common"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+          xmlns:custom="clr-namespace:CustomWindow"
         mc:Ignorable="d"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=True}"
@@ -391,4 +392,4 @@
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="PostCommentPanelPlaceHolder" Grid.Column="2" />
         </Grid>
     </Grid>
-</Window>
+</custom:CustomChrome>

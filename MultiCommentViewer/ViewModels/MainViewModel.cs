@@ -19,6 +19,7 @@ using Common;
 using System.Windows.Data;
 using System.Text.RegularExpressions;
 using CommentViewerCommon;
+using System.Windows;
 
 namespace MultiCommentViewer
 {
@@ -69,6 +70,80 @@ namespace MultiCommentViewer
     }
     public class MainViewModel : CommentDataGridViewModelBase
     {
+        #region WindowColor
+        public Brush ButtonForeground
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.White);
+            }
+        }
+        public Brush ButtonBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor);
+            }
+        }
+        public Brush ButtonBorderBrush
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor);
+            }
+        }
+        public Brush Test
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.Yellow);
+            }
+        }
+        public Brush TitleForeground
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.White);
+            }
+        }
+        public Brush TitleBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor);
+            }
+        }
+        public Brush TitleBarBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor);
+            }
+        }
+        public Brush ButtonMouseOverForeground
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.White);
+            }
+        }
+        public Brush ButtonMouseOverBackground
+        {
+            get
+            {
+                return new SolidColorBrush(_myColor);
+            }
+        }
+        public Brush ButtonMouseOverBorderBrush
+        {
+            get
+            {
+                return new SolidColorBrush(Colors.White);
+            }
+        }
+        public Visibility SystemButtonToolTipVisibility => Visibility.Collapsed;
+        private readonly Color _myColor = new Color { A = 0xFF, R = 45, G = 45, B = 48 };
+        #endregion//WindowColor
         #region Commands
         public ICommand ActivatedCommand { get; }
         public ICommand LoadedCommand { get; }
